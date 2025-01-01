@@ -5,7 +5,6 @@ import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
 import LeaderAddAttendanceModal from "./components/LeaderAddAttendanceModal";
 import LeaderAttendanceListCards from "./components/LeaderAttendanceListCards";
-import LeaderChangeAttendanceModal from "./components/LeaderChangeAttendanceModal";
 
 const LeaderAttendanceList = () => {
   return (

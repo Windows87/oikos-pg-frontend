@@ -46,6 +46,7 @@ const Card = ({
               onClick={button.onClick}
               small
               lighter
+              width="100%"
             >
               {button.text}
             </Button>
