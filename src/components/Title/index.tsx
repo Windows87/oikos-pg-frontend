@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Title = styled.h1<{ centered?: boolean }>`
-  font-size: 34px;
+  font-size: 30px;
   color: white;
   text-align: center;
   margin: 0;
