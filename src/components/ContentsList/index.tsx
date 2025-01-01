@@ -10,6 +10,7 @@ interface ContentsListProps {
   enableDeletion?: boolean;
   enableAddition?: boolean;
   widthContent?: string;
+  onNewContent?: (content: Content) => void;
 }
 
 const ContentsList = ({
@@ -17,6 +18,7 @@ const ContentsList = ({
   enableDeletion,
   enableAddition,
   widthContent,
+  onNewContent,
 }: ContentsListProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -38,7 +40,11 @@ const ContentsList = ({
           Adicionar Material
         </ContentListAddItemText>
       )}
-      <ContentAdditionModal isOpen={isModalOpen} onClose={closeModal} />
+      <ContentAdditionModal
+        isOpen={isModalOpen}
+        onSubmit={onNewContent}
+        onClose={closeModal}
+      />
     </ContentsListContainer>
   );
 };

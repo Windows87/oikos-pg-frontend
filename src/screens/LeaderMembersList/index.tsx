@@ -8,7 +8,7 @@ import LeaderMembersCards from "./components/LeaderMembersCards";
 const LeaderMembersList = () => {
   return (
     <DefaultBackground gap={16}>
-      <PageTitle title="Membros" subtitle="14 Membros Ativos do PG" />
+      <PageTitle title="Membros" subtitle="4 Membros Ativos do PG" />
       <ScrollContainer gap={8}>
         <Button width="100%" height={32} fontSize={14} lighter>
           Adicionar Membro

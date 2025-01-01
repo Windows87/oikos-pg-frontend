@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../../../components/Button";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
@@ -6,12 +7,16 @@ import Paragraph from "../../../components/Paragraph";
 import Select from "../../../components/Select";
 import Title from "../../../components/Title";
 
-const FirstStep = () => {
+interface FirstStepProps {
+  onChange: (step: number) => void;
+}
+
+const FirstStep = ({ onChange }: FirstStepProps) => {
   return (
     <>
       <Paragraph centered>Qual o tipo de pessoa que quer adicionar?</Paragraph>
-      <Button>Membro já Cadastrado</Button>
-      <Button>Visitante</Button>
+      <Button onClick={() => onChange(2)}>Membro já Cadastrado</Button>
+      <Button onClick={() => onChange(1)}>Visitante</Button>
     </>
   );
 };
@@ -41,10 +46,25 @@ const MemberStep = () => {
   );
 };
 
-const LeaderAddAttendanceModal = () => {
+interface LeaderAddAttendanceModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const LeaderAddAttendanceModal = ({
+  isOpen,
+  onClose,
+}: LeaderAddAttendanceModalProps) => {
+  const [step, setStep] = useState(0);
+
+  const steps = [
+    <FirstStep onChange={setStep} />,
+    <VisitorStep />,
+    <MemberStep />,
+  ];
   return (
-    <Modal isOpen onClose={() => {}}>
-      <MemberStep />
+    <Modal isOpen={isOpen} onClose={onClose}>
+      {steps[step]}
     </Modal>
   );
 };

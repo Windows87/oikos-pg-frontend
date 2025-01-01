@@ -25,11 +25,13 @@ export interface SelectOption {
 interface SelectProps {
   placeholder: string;
   options: SelectOption[];
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Select = ({ placeholder, options }: SelectProps) => {
+const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
   return (
-    <BaseSelect>
+    <BaseSelect value={value} onChange={onChange}>
       <option>{placeholder}</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>

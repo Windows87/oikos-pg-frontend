@@ -7,7 +7,7 @@ import LeaderMemberAttendancesCards from "./components/LeaderMemberAttendancesCa
 const LeaderMemberAttendances = () => {
   return (
     <DefaultBackground gap={16}>
-      <PageTitle title="Yuri Faria" subtitle="Faltou a 2 PGs Seguidos" />
+      <PageTitle title="Yuri Faria" subtitle="Faltou a 0 PGs Seguidos" />
       <ScrollContainer gap={8}>
         <LeaderMemberAttendancesCards />
       </ScrollContainer>

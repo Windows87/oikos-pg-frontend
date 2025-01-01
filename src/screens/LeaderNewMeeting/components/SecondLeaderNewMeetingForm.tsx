@@ -1,23 +1,25 @@
+import { useState } from "react";
 import Button from "../../../components/Button";
 import ContentsList from "../../../components/ContentsList";
-import Form from "../../../components/Form";
 import Content from "../../../types/Content";
 
-const contents: Content[] = [
-  {
-    id: "1",
-    name: "Perguntas do PG",
-    type: "PDF",
-    link: "/meeting/1",
-  },
-];
-
 const SecondLeaderNewMeetingForm = () => {
+  const [contents, setContents] = useState<Content[]>([]);
+
+  const handleNewContent = (content: Content) => {
+    setContents([...contents, content]);
+  };
+
   return (
-    <Form>
-      <ContentsList contents={contents} enableAddition enableDeletion />
+    <>
+      <ContentsList
+        contents={contents}
+        enableAddition
+        enableDeletion
+        onNewContent={handleNewContent}
+      />
       <Button>Finalizar</Button>
-    </Form>
+    </>
   );
 };
 

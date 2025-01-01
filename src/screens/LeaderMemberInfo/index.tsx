@@ -12,11 +12,11 @@ const LeaderMemberInfo = () => {
       <ScrollContainer gap={8}>
         <Card
           title="Dados Pessoais"
-          texts={["Data de Nascimento: 2 de Janeiro de 1998"]}
+          texts={["Data de Nascimento: 19 de Janeiro de 2003"]}
         />
         <Card
           title="Contato"
-          texts={["Email: yfaria@usp.br", "WhatsApp: (XX) XXXXX-XXXX"]}
+          texts={["Email: yfaria@usp.br", "WhatsApp: (35) 992512-1113"]}
         />
         <Button lighter width="100%" height={32} fontSize={14}>
           Remover do PG

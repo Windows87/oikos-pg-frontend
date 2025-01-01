@@ -1,3 +1,5 @@
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
 import GroupCode from "./screens/GroupCode";
 import LeaderAttendanceList from "./screens/LeaderAttendanceList";
 import LeaderMeeting from "./screens/LeaderMeeting";
@@ -15,9 +17,34 @@ import Starter from "./screens/Starter";
 
 function App() {
   return (
-    <>
-      <MemberMeeting />
-    </>
+    <Router>
+      <Routes>
+        <Route index path="/" element={<SplashScreen />} />
+        <Route path="/starter" element={<Starter />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/group-code" element={<GroupCode />} />
+
+        <Route path="/leader/meetings" element={<LeaderMeetings />} />
+        <Route path="/leader/meeting/new" element={<LeaderNewMeeting />} />
+        <Route path="/leader/meeting/" element={<LeaderMeeting />} />
+
+        <Route path="/leader/members" element={<LeaderMembersList />} />
+        <Route path="/leader/member/info" element={<LeaderMemberInfo />} />
+        <Route
+          path="/leader/member/attendance"
+          element={<LeaderMemberAttendances />}
+        />
+        <Route
+          path="/leader/meeting/attendance"
+          element={<LeaderAttendanceList />}
+        />
+
+        <Route path="/member/meetings" element={<MemberMeetings />} />
+        <Route path="/member/meeting" element={<MemberMeeting />} />
+      </Routes>
+    </Router>
   );
 }
 

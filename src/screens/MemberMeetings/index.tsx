@@ -1,4 +1,3 @@
-import ChangeAttendanceModal from "../../components/ChangeAttendanceModal";
 import DefaultBackground from "../../components/DefaultBackground";
 import MemberNavigationButtons from "../../components/MemberNavigationButtons";
 import PageTitle from "../../components/PageTitle";
@@ -13,7 +12,6 @@ const MemberMeetings = () => {
         <MemberMeetingsCards />
       </ScrollContainer>
       <MemberNavigationButtons />
-      <ChangeAttendanceModal />
     </DefaultBackground>
   );
 };

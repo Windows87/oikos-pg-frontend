@@ -24,9 +24,9 @@ const LeaderMeeting = () => {
         <Card
           title="Presença"
           texts={[
-            "10 de 14 Membros Presentes (71%)",
-            "1 Visitante",
-            "Motivos de Falta: Doente (2), Prova (1), Viagem (1)",
+            "3 de 4 Membros Presentes (75%)",
+            "0 Visitantes Presentes",
+            "Motivos de Falta: Doente (1)",
           ]}
         />
         <Card title="Materiais">
@@ -35,7 +35,7 @@ const LeaderMeeting = () => {
         <Card
           title="Análise do Encontro"
           texts={[
-            "Os membros ficaram engajados, principalmente os que já tem uma relação de namoro. Como se trata de jovens, o tema não foi tão centrado em detalhes, mas em dúvidas sobre o futuro.",
+            "Os membros ficaram engajados, participaram bastante e se abriram para compartilhar suas experiências. Ao disponibilizar as perguntas anteriormente foi possível que todos se preparassem para o encontro e trouxessem suas respostas prontas.",
           ]}
         />
       </ScrollContainer>

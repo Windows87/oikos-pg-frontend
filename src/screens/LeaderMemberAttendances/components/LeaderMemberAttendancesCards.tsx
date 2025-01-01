@@ -16,6 +16,11 @@ const LeaderMemberAttendancesCards = () => {
         backgroundColor={theme.green.dark}
         texts={["12 de Janeiro", "Presente"]}
       />
+      <Card
+        title="Família"
+        backgroundColor={theme.green.dark}
+        texts={["5 de Janeiro", "Presente"]}
+      />
     </LeaderMemberAttendancesCardsContainer>
   );
 };

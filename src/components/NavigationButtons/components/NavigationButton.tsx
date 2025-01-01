@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../../settings/theme";
 import { NavigationItem } from "..";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NavigationButtonContainer = styled.div<{ enabled?: boolean }>`
   display: flex;
@@ -18,9 +19,16 @@ interface NavigationButtonProps {
 }
 
 const NavigationButton = ({ item }: NavigationButtonProps) => {
-  const enabled = false;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectToPage = () => {
+    navigate(item.redirect);
+  };
+
+  const enabled = location.pathname === item.redirect;
   return (
-    <NavigationButtonContainer enabled={enabled}>
+    <NavigationButtonContainer onClick={redirectToPage} enabled={enabled}>
       {
         <item.Icon
           color={enabled ? "white" : theme.blue.mediumlight}
