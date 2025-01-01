@@ -3,6 +3,7 @@ import DefaultBackground from "../../components/DefaultBackground";
 import LeaderNavigationButtons from "../../components/LeaderNavigationButtons";
 import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
+import LeaderFinishMeetingModal from "./components/LeaderFinishMeetingModal";
 import LeaderMeetingsCards from "./components/LeaderMeetingsCards";
 
 const LeaderMeetings = () => {
@@ -16,6 +17,7 @@ const LeaderMeetings = () => {
         <LeaderMeetingsCards />
       </ScrollContainer>
       <LeaderNavigationButtons />
+      <LeaderFinishMeetingModal />
     </DefaultBackground>
   );
 };
