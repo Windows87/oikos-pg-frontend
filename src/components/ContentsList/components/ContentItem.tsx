@@ -7,13 +7,14 @@ import { MdDelete } from "react-icons/md";
 interface ContentItemProps {
   content: Content;
   enableDeletion?: boolean;
+  widthContent?: string;
 }
 
-const ContentItemContainer = styled.div`
+const ContentItemContainer = styled.div<{ widthContent?: string }>`
   background-color: ${theme.blue.dark};
   color: white;
   font-size: 16px;
-  width: calc(95% - 24px);
+  width: calc(${(props) => props.widthContent || "95%"} - 24px);
   height: 42px;
   min-height: 42px;
   font-weight: 600;
@@ -34,11 +35,15 @@ const ContentItemDeleteContainer = styled.div`
   cursor: pointer;
 `;
 
-const ContentItem = ({ content, enableDeletion }: ContentItemProps) => {
+const ContentItem = ({
+  content,
+  enableDeletion,
+  widthContent,
+}: ContentItemProps) => {
   // @ts-ignore
   const ContentItemIcon = contentTypeToIconMap[content.type];
   return (
-    <ContentItemContainer>
+    <ContentItemContainer widthContent={widthContent}>
       <ContentItemIcon color="white" size={18} />
       <ContentItemName>{content.name}</ContentItemName>
       {enableDeletion && (

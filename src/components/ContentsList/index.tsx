@@ -9,12 +9,14 @@ interface ContentsListProps {
   contents: Content[];
   enableDeletion?: boolean;
   enableAddition?: boolean;
+  widthContent?: string;
 }
 
 const ContentsList = ({
   contents,
   enableDeletion,
   enableAddition,
+  widthContent,
 }: ContentsListProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,6 +30,7 @@ const ContentsList = ({
           enableDeletion={enableDeletion}
           key={content.id}
           content={content}
+          widthContent={widthContent}
         />
       ))}
       {enableAddition && (
