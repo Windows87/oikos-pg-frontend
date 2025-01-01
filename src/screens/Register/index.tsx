@@ -6,7 +6,7 @@ import SecondRegisterForm from "./components/SecondRegisterForm";
 const Register = () => {
   return (
     <DefaultBackground centered gap={12}>
-      <Logo width={65} />
+      <Logo width={40} />
       <SecondRegisterForm />
     </DefaultBackground>
   );

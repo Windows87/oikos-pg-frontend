@@ -1,16 +1,16 @@
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
+import Title from "../../components/Title";
 import StarterBackground from "./components/StarterBackground";
-import StarterTitle from "./components/StarterTitle";
 
 const Starter = () => {
   return (
     <StarterBackground>
       <Logo width={55} />
-      <StarterTitle>
+      <Title centered>
         Somos casa
         <br />e família.
-      </StarterTitle>
+      </Title>
       <Button>Entrar</Button>
     </StarterBackground>
   );

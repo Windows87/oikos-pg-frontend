@@ -8,7 +8,7 @@ import CreateAccountText from "./components/CreateAccountText";
 const Login = () => {
   return (
     <DefaultBackground centered gap={12}>
-      <Logo width={65} />
+      <Logo width={40} />
       <Form>
         <Input type="email" placeholder="Email" />
         <Input type="password" placeholder="Senha" />
