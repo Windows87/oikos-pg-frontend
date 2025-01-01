@@ -4,7 +4,7 @@ import theme from "../../../settings/theme";
 const CardContainer = styled.div<{ backgroundColor?: string }>`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   padding: 16px;
   background-color: ${(props) =>
     props.backgroundColor || theme.blue.mediumlight};

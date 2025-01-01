@@ -1,4 +1,5 @@
 import GroupCode from "./screens/GroupCode";
+import LeaderAttendanceList from "./screens/LeaderAttendanceList";
 import LeaderMeeting from "./screens/LeaderMeeting";
 import LeaderMeetings from "./screens/LeaderMeetings";
 import LeaderNewMeeting from "./screens/LeaderNewMeeting";
@@ -10,7 +11,7 @@ import Starter from "./screens/Starter";
 function App() {
   return (
     <>
-      <LeaderMeeting />
+      <LeaderAttendanceList />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import Card from "../../components/Card";
 import ContentsList from "../../components/ContentsList";
 import DefaultBackground from "../../components/DefaultBackground";
+import LeaderNavigationButtons from "../../components/LeaderNavigationButtons";
 import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
 import Content from "../../types/Content";
@@ -38,6 +39,7 @@ const LeaderMeeting = () => {
           ]}
         />
       </ScrollContainer>
+      <LeaderNavigationButtons />
     </DefaultBackground>
   );
 };
