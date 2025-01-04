@@ -4,6 +4,7 @@ import MeetingAttendance from "../../../types/MeetingAttendance";
 import attendanceTypeToTheme from "../../../settings/attendanceTypeToTheme";
 import ChangeAttendanceModal from "../../../components/ChangeAttendanceModal";
 import { useState } from "react";
+import apiClient from "../../../clients/apiClient";
 
 const LeaderAttendanceListCardsContainer = styled.div`
   display: flex;
@@ -13,14 +14,19 @@ const LeaderAttendanceListCardsContainer = styled.div`
 
 interface LeaderAttendanceListCardsProps {
   onSubmitChangeAttendance: (newMeetingAttendance: MeetingAttendance) => void;
+  onSubmitRemoveAttendance: (attendance: MeetingAttendance) => void;
   attendance: MeetingAttendance[];
 }
 
 const LeaderAttendanceListCards = ({
   onSubmitChangeAttendance,
+  onSubmitRemoveAttendance,
   attendance,
 }: LeaderAttendanceListCardsProps) => {
   const [changeAttendance, setChangeAttendance] = useState<
+    MeetingAttendance | undefined
+  >(undefined);
+  const [removingAttendance, setRemovingAttendance] = useState<
     MeetingAttendance | undefined
   >(undefined);
 
@@ -33,7 +39,19 @@ const LeaderAttendanceListCards = ({
     return attendee.attendance_type;
   };
 
-  const handleChangeAttendance = () => {};
+  const removeAttendance = async (attendance: MeetingAttendance) => {
+    if (removingAttendance) return;
+    setRemovingAttendance(attendance);
+
+    try {
+      await apiClient.removeAttendance(attendance.id);
+      onSubmitRemoveAttendance(attendance);
+    } catch (error: any) {
+      alert(error.message);
+    }
+
+    setRemovingAttendance(undefined);
+  };
 
   return (
     <>
@@ -55,9 +73,11 @@ const LeaderAttendanceListCards = ({
                   attendanceTypeToTheme[attendee.attendance_type].medium,
               },
               {
-                text: "Remover",
-                onClick: () => {},
-
+                text:
+                  removingAttendance?.id === attendee.id
+                    ? "Removendo.."
+                    : "Remover",
+                onClick: () => removeAttendance(attendee),
                 backgroundColor:
                   // @ts-ignore
                   attendanceTypeToTheme[attendee.attendance_type].medium,

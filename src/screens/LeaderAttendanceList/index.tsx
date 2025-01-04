@@ -24,6 +24,13 @@ const LeaderAttendanceList = () => {
     setMeeting({ ...meeting, attendance: newAttendance });
   };
 
+  const handleRemoveAttendance = (attendance: MeetingAttendance) => {
+    const newAttendance = meeting.attendance!.filter(
+      (a) => a.id !== attendance.id
+    );
+    setMeeting({ ...meeting, attendance: newAttendance });
+  };
+
   const handleAddNewVisitorButton = () => setIsAddAttendanceModalOpen(true);
   const handleCloseAddAttendanceModal = () =>
     setIsAddAttendanceModalOpen(false);
@@ -42,6 +49,7 @@ const LeaderAttendanceList = () => {
           Adicionar Visitante
         </Button>
         <LeaderAttendanceListCards
+          onSubmitRemoveAttendance={handleRemoveAttendance}
           onSubmitChangeAttendance={handleChangeAttendance}
           attendance={meeting.attendance!}
         />
