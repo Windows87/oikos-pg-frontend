@@ -30,7 +30,7 @@ const ContentsList = ({
       {contents.map((content) => (
         <ContentItem
           enableDeletion={enableDeletion}
-          key={content.id}
+          key={content.id || content.name}
           content={content}
           widthContent={widthContent}
         />

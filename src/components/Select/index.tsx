@@ -27,11 +27,18 @@ interface SelectProps {
   options: SelectOption[];
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  required?: boolean;
 }
 
-const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
+const Select = ({
+  placeholder,
+  options,
+  value,
+  required,
+  onChange,
+}: SelectProps) => {
   return (
-    <BaseSelect value={value} onChange={onChange}>
+    <BaseSelect value={value} onChange={onChange} required={required}>
       <option>{placeholder}</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>

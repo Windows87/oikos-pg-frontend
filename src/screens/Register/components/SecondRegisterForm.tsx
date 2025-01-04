@@ -18,7 +18,7 @@ const FirstRegisterForm = ({ isLoading, onSubmit }: FirstRegisterFormProps) => {
     const month = birthday.split("/")[1];
     const year = birthday.split("/")[2];
 
-    const formattedBirthday = `${day}/${month}/${year}`;
+    const formattedBirthday = `${month}/${day}/${year}`;
     onSubmit(new Date(formattedBirthday).toISOString(), whatsapp);
   };
 

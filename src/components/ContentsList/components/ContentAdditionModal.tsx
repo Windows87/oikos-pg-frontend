@@ -26,6 +26,9 @@ const ContentAdditionModal = ({
 
   const onSubmitForm = () => {
     if (onSubmit) onSubmit({ name, type, link });
+    setName("");
+    setType("");
+    setLink("");
     onClose();
   };
 

@@ -1,5 +1,6 @@
 import api from "../settings/api";
 import Meeting from "../types/Meeting";
+import MeetingContent from "../types/MeetingContent";
 import User from "../types/User";
 
 const apiClient = {
@@ -141,6 +142,37 @@ const apiClient = {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ analysis }),
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
+  createMeeting: (payload: {
+    name: string;
+    date: string;
+    theme: string;
+    contents: MeetingContent[];
+  }) => {
+    return new Promise<void>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
         });
 
         const response = await call.json();

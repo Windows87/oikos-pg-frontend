@@ -42,8 +42,13 @@ const ContentItem = ({
 }: ContentItemProps) => {
   // @ts-ignore
   const ContentItemIcon = contentTypeToIconMap[content.type];
+
+  const handleClick = () => {
+    window.open(content.link, "_newtab");
+  };
+
   return (
-    <ContentItemContainer widthContent={widthContent}>
+    <ContentItemContainer widthContent={widthContent} onClick={handleClick}>
       <ContentItemIcon color="white" size={18} />
       <ContentItemName>{content.name}</ContentItemName>
       {enableDeletion && (

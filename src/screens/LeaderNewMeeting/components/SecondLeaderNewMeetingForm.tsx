@@ -3,8 +3,20 @@ import Button from "../../../components/Button";
 import ContentsList from "../../../components/ContentsList";
 import MeetingContent from "../../../types/MeetingContent";
 
-const SecondLeaderNewMeetingForm = () => {
+interface SecondLeaderNewMeetingFormProps {
+  isLoading: boolean;
+  onSubmit: (contents: MeetingContent[]) => void;
+}
+
+const SecondLeaderNewMeetingForm = ({
+  isLoading,
+  onSubmit,
+}: SecondLeaderNewMeetingFormProps) => {
   const [contents, setContents] = useState<MeetingContent[]>([]);
+
+  const handleSubmit = () => {
+    onSubmit(contents);
+  };
 
   const handleNewContent = (content: MeetingContent) => {
     setContents([...contents, content]);
@@ -18,7 +30,9 @@ const SecondLeaderNewMeetingForm = () => {
         enableDeletion
         onNewContent={handleNewContent}
       />
-      <Button>Finalizar</Button>
+      <Button onClick={handleSubmit}>
+        {isLoading ? "Adicionando.." : "Finalizar"}
+      </Button>
     </>
   );
 };
