@@ -15,7 +15,11 @@ const formatDate = (date: string) => {
   } else {
     const day = dateObj.getDate();
     const month = dateObj.toLocaleString("pt-BR", { month: "long" });
-    return `${day} de ${month.charAt(0).toUpperCase() + month.slice(1)}`;
+    return `${day} de ${month.charAt(0).toUpperCase() + month.slice(1)}${
+      dateObj.getFullYear() === today.getFullYear()
+        ? ""
+        : ` de ${dateObj.getFullYear()}`
+    }`;
   }
 };
 

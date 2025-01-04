@@ -26,6 +26,13 @@ const LeaderMeetings = () => {
     setIsLoading(false);
   };
 
+  const getNumberOfMeetingsOfYear = (meetings: Meeting[]) => {
+    const currentYear = new Date().getFullYear();
+    return meetings.filter(
+      (meeting) => new Date(meeting.date).getFullYear() === currentYear
+    ).length;
+  };
+
   useEffect(() => {
     fetchMeetings();
   }, []);
@@ -34,10 +41,18 @@ const LeaderMeetings = () => {
 
   return (
     <DefaultBackground gap={16}>
-      <PageTitle title="Encontros" subtitle="2 Encontros em 2025!" />
+      <PageTitle
+        title="Encontros"
+        subtitle={`${getNumberOfMeetingsOfYear(
+          meetings
+        )} Encontros em ${new Date().getFullYear()}!`}
+      />
       <ScrollContainer gap={8}>
         <LeaderNewMeetingButton />
-        <LeaderMeetingsCards meetings={meetings} />
+        <LeaderMeetingsCards
+          onFinishMeeting={fetchMeetings}
+          meetings={meetings}
+        />
       </ScrollContainer>
       <LeaderNavigationButtons />
     </DefaultBackground>

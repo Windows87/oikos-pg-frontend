@@ -16,6 +16,7 @@ const LeaderMeetingsCardsContainer = styled.div`
 
 interface LeaderMeetingsCardsProps {
   meetings: Meeting[];
+  onFinishMeeting: () => void;
 }
 
 const formatAttendanceString = (attendanceList: MeetingAttendance[]) => {
@@ -35,11 +36,16 @@ const formatAttendanceString = (attendanceList: MeetingAttendance[]) => {
   return presentsString;
 };
 
-const LeaderMeetingsCards = ({ meetings }: LeaderMeetingsCardsProps) => {
+const LeaderMeetingsCards = ({
+  meetings,
+  onFinishMeeting,
+}: LeaderMeetingsCardsProps) => {
   const navigate = useNavigate();
-  const [finishMeetingId, setFinishMeetingId] = useState<number | null>(null);
+  const [finishMeetingId, setFinishMeetingId] = useState<number | undefined>(
+    undefined
+  );
 
-  const handleCloseFinishMeetingModal = () => setFinishMeetingId(null);
+  const handleCloseFinishMeetingModal = () => setFinishMeetingId(undefined);
   const goToAttendanceList = () => navigate("/leader/meeting/attendance");
   const goToMeetingInfo = () => navigate("/leader/meeting/");
 
@@ -65,7 +71,7 @@ const LeaderMeetingsCards = ({ meetings }: LeaderMeetingsCardsProps) => {
                     },
                     {
                       text: "Finalizar",
-                      onClick: () => setFinishMeetingId(1),
+                      onClick: () => setFinishMeetingId(meeting.id),
                       backgroundColor: theme.yellow.medium,
                     },
                     {
@@ -90,6 +96,8 @@ const LeaderMeetingsCards = ({ meetings }: LeaderMeetingsCardsProps) => {
       </LeaderMeetingsCardsContainer>
       <LeaderFinishMeetingModal
         isOpen={!!finishMeetingId}
+        meetingId={finishMeetingId}
+        onSubmit={onFinishMeeting}
         onClose={handleCloseFinishMeetingModal}
       />
     </>
