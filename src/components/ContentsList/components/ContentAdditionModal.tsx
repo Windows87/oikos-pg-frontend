@@ -7,12 +7,12 @@ import Title from "../../../components/Title";
 import contentTypes from "../../../settings/contentTypes";
 import Input from "../../Input";
 import Select from "../../Select";
-import Content from "../../../types/Content";
+import MeetingContent from "../../../types/MeetingContent";
 
 interface ContentAdditionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit?: (content: Content) => void;
+  onSubmit?: (content: MeetingContent) => void;
 }
 
 const ContentAdditionModal = ({

@@ -1,16 +1,16 @@
 import { useState } from "react";
-import Content from "../../types/Content";
 import ContentAdditionModal from "./components/ContentAdditionModal";
 import ContentItem from "./components/ContentItem";
 import ContentListAddItemText from "./components/ContentListAddItemText";
 import ContentsListContainer from "./components/ContentsListContainer";
+import MeetingContent from "../../types/MeetingContent";
 
 interface ContentsListProps {
-  contents: Content[];
+  contents: MeetingContent[];
   enableDeletion?: boolean;
   enableAddition?: boolean;
   widthContent?: string;
-  onNewContent?: (content: Content) => void;
+  onNewContent?: (content: MeetingContent) => void;
 }
 
 const ContentsList = ({

@@ -47,7 +47,10 @@ const LeaderMeetingsCards = ({
 
   const handleCloseFinishMeetingModal = () => setFinishMeetingId(undefined);
   const goToAttendanceList = () => navigate("/leader/meeting/attendance");
-  const goToMeetingInfo = () => navigate("/leader/meeting/");
+  const goToMeetingInfo = (meeting: Meeting) =>
+    navigate("/leader/meeting/", {
+      state: { meeting },
+    });
 
   return (
     <>
@@ -83,7 +86,7 @@ const LeaderMeetingsCards = ({
                 : [
                     {
                       text: "Visualizar",
-                      onClick: goToMeetingInfo,
+                      onClick: () => goToMeetingInfo(meeting),
                     },
                     {
                       text: "Presenças",

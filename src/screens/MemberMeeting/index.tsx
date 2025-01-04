@@ -4,11 +4,11 @@ import DefaultBackground from "../../components/DefaultBackground";
 import MemberNavigationButtons from "../../components/MemberNavigationButtons";
 import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
-import Content from "../../types/Content";
+import MeetingContent from "../../types/MeetingContent";
 
-const contents: Content[] = [
+const contents: MeetingContent[] = [
   {
-    id: "1",
+    id: 1,
     name: "Perguntas do PG",
     type: "PDF",
     link: "/meeting/1",

@@ -1,5 +1,5 @@
 export default interface MeetingContent {
-  id: number;
+  id?: number;
   name: string;
   type: string;
   link: string;

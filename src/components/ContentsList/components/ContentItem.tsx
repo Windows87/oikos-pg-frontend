@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Content from "../../../types/Content";
 import theme from "../../../settings/theme";
 import contentTypeToIconMap from "../../../settings/contentTypeToIconMap";
 import { MdDelete } from "react-icons/md";
+import MeetingContent from "../../../types/MeetingContent";
 
 interface ContentItemProps {
-  content: Content;
+  content: MeetingContent;
   enableDeletion?: boolean;
   widthContent?: string;
 }

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
 import ContentsList from "../../../components/ContentsList";
-import Content from "../../../types/Content";
+import MeetingContent from "../../../types/MeetingContent";
 
 const SecondLeaderNewMeetingForm = () => {
-  const [contents, setContents] = useState<Content[]>([]);
+  const [contents, setContents] = useState<MeetingContent[]>([]);
 
-  const handleNewContent = (content: Content) => {
+  const handleNewContent = (content: MeetingContent) => {
     setContents([...contents, content]);
   };
 
