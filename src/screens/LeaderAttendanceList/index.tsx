@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Button from "../../components/Button";
 import DefaultBackground from "../../components/DefaultBackground";
@@ -7,8 +8,13 @@ import ScrollContainer from "../../components/ScrollContainer";
 import LeaderAddAttendanceModal from "./components/LeaderAddAttendanceModal";
 import LeaderAttendanceListCards from "./components/LeaderAttendanceListCards";
 import ChangeAttendanceModal from "../../components/ChangeAttendanceModal";
+import Meeting from "../../types/Meeting";
+import formatDate from "../../utils/formatDate";
 
 const LeaderAttendanceList = () => {
+  const location = useLocation();
+  const meeting: Meeting = location.state.meeting;
+
   const [changeAttendanceId, setChangeAttendanceId] = useState<number | null>(
     null
   );
@@ -23,7 +29,7 @@ const LeaderAttendanceList = () => {
 
   return (
     <DefaultBackground gap={16}>
-      <PageTitle title="Casamento" subtitle="12 de Janeiro" />
+      <PageTitle title={meeting.name} subtitle={formatDate(meeting.date)} />
       <ScrollContainer gap={8}>
         <Button
           width="100%"
@@ -35,6 +41,7 @@ const LeaderAttendanceList = () => {
           Adicionar Visitante
         </Button>
         <LeaderAttendanceListCards
+          attendance={meeting.attendance!}
           onChangeAttendanceClick={setChangeAttendanceId}
         />
       </ScrollContainer>

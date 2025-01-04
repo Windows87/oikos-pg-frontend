@@ -46,7 +46,6 @@ const LeaderMeetingsCards = ({
   );
 
   const handleCloseFinishMeetingModal = () => setFinishMeetingId(undefined);
-  const goToAttendanceList = () => navigate("/leader/meeting/attendance");
 
   const goToMeetingInfo = (meeting: Meeting) =>
     navigate("/leader/meeting/", {
@@ -55,6 +54,11 @@ const LeaderMeetingsCards = ({
 
   const goToEditMeeting = (meeting: Meeting) =>
     navigate("/leader/meeting/new", {
+      state: { meeting },
+    });
+
+  const goToAttendanceList = (meeting: Meeting) =>
+    navigate("/leader/meeting/attendance", {
       state: { meeting },
     });
 
@@ -85,7 +89,7 @@ const LeaderMeetingsCards = ({
                     },
                     {
                       text: "Presenças",
-                      onClick: goToAttendanceList,
+                      onClick: () => goToAttendanceList(meeting),
                       backgroundColor: theme.yellow.medium,
                     },
                   ]
@@ -96,7 +100,7 @@ const LeaderMeetingsCards = ({
                     },
                     {
                       text: "Presenças",
-                      onClick: goToAttendanceList,
+                      onClick: () => goToAttendanceList(meeting),
                     },
                   ]
             }

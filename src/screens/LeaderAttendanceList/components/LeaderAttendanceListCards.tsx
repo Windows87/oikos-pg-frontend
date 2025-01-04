@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Card from "../../../components/Card";
 import theme from "../../../settings/theme";
+import MeetingAttendance from "../../../types/MeetingAttendance";
+import attendanceTypeToTheme from "../../../settings/attendanceTypeToTheme";
 
 const LeaderAttendanceListCardsContainer = styled.div`
   display: flex;
@@ -9,79 +11,48 @@ const LeaderAttendanceListCardsContainer = styled.div`
 `;
 
 interface LeaderAttendanceListCardsProps {
+  attendance: MeetingAttendance[];
   onChangeAttendanceClick: (id: number) => void;
 }
 
 const LeaderAttendanceListCards = ({
+  attendance,
   onChangeAttendanceClick,
 }: LeaderAttendanceListCardsProps) => {
+  const getAttendeeText = (attendee: MeetingAttendance): string => {
+    if (attendee.absence_reason) {
+      return `${attendee.attendance_type} - ${attendee.absence_reason}`;
+    }
+    return attendee.attendance_type;
+  };
+
   return (
     <LeaderAttendanceListCardsContainer>
-      <Card
-        title="Yuri Faria"
-        texts={["Presente"]}
-        backgroundColor={theme.green.dark}
-        buttons={[
-          {
-            text: "Alterar",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-          {
-            text: "Remover",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-        ]}
-      />
-      <Card
-        title="Couto Lenda"
-        texts={["Presente"]}
-        backgroundColor={theme.green.dark}
-        buttons={[
-          {
-            text: "Alterar",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-          {
-            text: "Remover",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-        ]}
-      />
-      <Card
-        title="Bruno"
-        texts={["Presente"]}
-        backgroundColor={theme.green.dark}
-        buttons={[
-          {
-            text: "Alterar",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-          {
-            text: "Remover",
-            onClick: () => {},
-            backgroundColor: theme.green.medium,
-          },
-        ]}
-      />
-      <Card
-        title="Sarah"
-        texts={["Não Preenchido"]}
-        buttons={[
-          {
-            text: "Alterar",
-            onClick: () => onChangeAttendanceClick(1),
-          },
-          {
-            text: "Remover",
-            onClick: () => {},
-          },
-        ]}
-      />
+      {attendance.map((attendee) => (
+        <Card
+          title={attendee.user ? attendee.user.name : attendee.visitor_name!}
+          texts={[getAttendeeText(attendee)]}
+          // @ts-ignore
+          backgroundColor={attendanceTypeToTheme[attendee.attendance_type].dark}
+          buttons={[
+            {
+              text: "Alterar",
+              onClick: () => {},
+              backgroundColor:
+                // @ts-ignore
+                attendanceTypeToTheme[attendee.attendance_type].medium,
+            },
+            {
+              text: "Remover",
+              onClick: () => {},
+
+              backgroundColor:
+                // @ts-ignore
+                attendanceTypeToTheme[attendee.attendance_type].medium,
+            },
+          ]}
+        />
+      ))}
     </LeaderAttendanceListCardsContainer>
   );
 };
