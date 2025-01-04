@@ -4,6 +4,9 @@ import theme from "../../../settings/theme";
 import { useNavigate } from "react-router-dom";
 import LeaderFinishMeetingModal from "./LeaderFinishMeetingModal";
 import { useState } from "react";
+import Meeting from "../../../types/Meeting";
+import formatDate from "../../../utils/formatDate";
+import MeetingAttendance from "../../../types/MeetingAttendance";
 
 const LeaderMeetingsCardsContainer = styled.div`
   display: flex;
@@ -11,7 +14,28 @@ const LeaderMeetingsCardsContainer = styled.div`
   gap: 8px;
 `;
 
-const LeaderMeetingsCards = () => {
+interface LeaderMeetingsCardsProps {
+  meetings: Meeting[];
+}
+
+const formatAttendanceString = (attendanceList: MeetingAttendance[]) => {
+  const numberOfPresents = attendanceList.filter(
+    (attendance) => attendance.attendance_type === "Presente"
+  ).length;
+  const numberOfVisitants = attendanceList.filter(
+    (attendance) => attendance.attendance_type === "Visitante"
+  ).length;
+  const presentsString =
+    numberOfPresents === 1 ? `1 Presente` : `${numberOfPresents} Presentes`;
+  const visitantsString =
+    numberOfVisitants === 1 ? `1 Visitante` : `${numberOfVisitants} Visitantes`;
+
+  if (numberOfVisitants) return `${presentsString} e ${visitantsString}`;
+
+  return presentsString;
+};
+
+const LeaderMeetingsCards = ({ meetings }: LeaderMeetingsCardsProps) => {
   const navigate = useNavigate();
   const [finishMeetingId, setFinishMeetingId] = useState<number | null>(null);
 
@@ -22,42 +46,47 @@ const LeaderMeetingsCards = () => {
   return (
     <>
       <LeaderMeetingsCardsContainer>
-        <Card
-          title="Casamento"
-          texts={["12 de Janeiro - 3 Presentes - 1 Pendente"]}
-          backgroundColor={theme.yellow.dark}
-          buttons={[
-            {
-              text: "Editar",
-              onClick: () => {},
-              backgroundColor: theme.yellow.medium,
-            },
-            {
-              text: "Finalizar",
-              onClick: () => setFinishMeetingId(1),
-              backgroundColor: theme.yellow.medium,
-            },
-            {
-              text: "Presenças",
-              onClick: goToAttendanceList,
-              backgroundColor: theme.yellow.medium,
-            },
-          ]}
-        />
-        <Card
-          title="Família"
-          texts={["5 de Janeiro - 3 Presentes"]}
-          buttons={[
-            {
-              text: "Visualizar",
-              onClick: goToMeetingInfo,
-            },
-            {
-              text: "Presenças",
-              onClick: () => {},
-            },
-          ]}
-        />
+        {meetings.map((meeting) => (
+          <Card
+            title={meeting.name}
+            texts={[
+              `${formatDate(meeting.date)} - ${formatAttendanceString(
+                meeting.attendance!
+              )}`,
+            ]}
+            backgroundColor={!meeting.analysis ? theme.yellow.dark : undefined}
+            buttons={
+              !meeting.analysis
+                ? [
+                    {
+                      text: "Editar",
+                      onClick: () => {},
+                      backgroundColor: theme.yellow.medium,
+                    },
+                    {
+                      text: "Finalizar",
+                      onClick: () => setFinishMeetingId(1),
+                      backgroundColor: theme.yellow.medium,
+                    },
+                    {
+                      text: "Presenças",
+                      onClick: goToAttendanceList,
+                      backgroundColor: theme.yellow.medium,
+                    },
+                  ]
+                : [
+                    {
+                      text: "Visualizar",
+                      onClick: goToMeetingInfo,
+                    },
+                    {
+                      text: "Presenças",
+                      onClick: goToAttendanceList,
+                    },
+                  ]
+            }
+          />
+        ))}
       </LeaderMeetingsCardsContainer>
       <LeaderFinishMeetingModal
         isOpen={!!finishMeetingId}

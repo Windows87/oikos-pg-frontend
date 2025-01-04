@@ -46,7 +46,7 @@ const GroupCode = () => {
           codeStyle
           maxLength={6}
         />
-        <Button type="submit">Entrar</Button>
+        <Button type="submit">{isLoading ? "Entrando.." : "Entrar"}</Button>
       </Form>
     </DefaultBackground>
   );

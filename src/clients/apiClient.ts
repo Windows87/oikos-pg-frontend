@@ -1,4 +1,5 @@
 import api from "../settings/api";
+import Meeting from "../types/Meeting";
 import User from "../types/User";
 
 const apiClient = {
@@ -99,6 +100,30 @@ const apiClient = {
         }
 
         resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
+  getMeetings: () => {
+    return new Promise<Meeting[]>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve(response);
       } catch (error) {
         reject(error);
       }
