@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Card from "../../../components/Card";
-import theme from "../../../settings/theme";
 import MeetingAttendance from "../../../types/MeetingAttendance";
 import attendanceTypeToTheme from "../../../settings/attendanceTypeToTheme";
+import ChangeAttendanceModal from "../../../components/ChangeAttendanceModal";
+import { useState } from "react";
 
 const LeaderAttendanceListCardsContainer = styled.div`
   display: flex;
@@ -11,14 +12,20 @@ const LeaderAttendanceListCardsContainer = styled.div`
 `;
 
 interface LeaderAttendanceListCardsProps {
+  onSubmitChangeAttendance: (newMeetingAttendance: MeetingAttendance) => void;
   attendance: MeetingAttendance[];
-  onChangeAttendanceClick: (id: number) => void;
 }
 
 const LeaderAttendanceListCards = ({
+  onSubmitChangeAttendance,
   attendance,
-  onChangeAttendanceClick,
 }: LeaderAttendanceListCardsProps) => {
+  const [changeAttendance, setChangeAttendance] = useState<
+    MeetingAttendance | undefined
+  >(undefined);
+
+  const closeChangeAttendanceModal = () => setChangeAttendance(undefined);
+
   const getAttendeeText = (attendee: MeetingAttendance): string => {
     if (attendee.absence_reason) {
       return `${attendee.attendance_type} - ${attendee.absence_reason}`;
@@ -26,34 +33,46 @@ const LeaderAttendanceListCards = ({
     return attendee.attendance_type;
   };
 
-  return (
-    <LeaderAttendanceListCardsContainer>
-      {attendance.map((attendee) => (
-        <Card
-          title={attendee.user ? attendee.user.name : attendee.visitor_name!}
-          texts={[getAttendeeText(attendee)]}
-          // @ts-ignore
-          backgroundColor={attendanceTypeToTheme[attendee.attendance_type].dark}
-          buttons={[
-            {
-              text: "Alterar",
-              onClick: () => {},
-              backgroundColor:
-                // @ts-ignore
-                attendanceTypeToTheme[attendee.attendance_type].medium,
-            },
-            {
-              text: "Remover",
-              onClick: () => {},
+  const handleChangeAttendance = () => {};
 
-              backgroundColor:
-                // @ts-ignore
-                attendanceTypeToTheme[attendee.attendance_type].medium,
-            },
-          ]}
-        />
-      ))}
-    </LeaderAttendanceListCardsContainer>
+  return (
+    <>
+      <LeaderAttendanceListCardsContainer>
+        {attendance.map((attendee) => (
+          <Card
+            title={attendee.user ? attendee.user.name : attendee.visitor_name!}
+            texts={[getAttendeeText(attendee)]}
+            backgroundColor={
+              // @ts-ignore
+              attendanceTypeToTheme[attendee.attendance_type].dark
+            }
+            buttons={[
+              {
+                text: "Alterar",
+                onClick: () => setChangeAttendance(attendee),
+                backgroundColor:
+                  // @ts-ignore
+                  attendanceTypeToTheme[attendee.attendance_type].medium,
+              },
+              {
+                text: "Remover",
+                onClick: () => {},
+
+                backgroundColor:
+                  // @ts-ignore
+                  attendanceTypeToTheme[attendee.attendance_type].medium,
+              },
+            ]}
+          />
+        ))}
+      </LeaderAttendanceListCardsContainer>
+      <ChangeAttendanceModal
+        attendance={changeAttendance}
+        isOpen={!!changeAttendance}
+        onSubmit={onSubmitChangeAttendance}
+        onClose={closeChangeAttendanceModal}
+      />
+    </>
   );
 };
 

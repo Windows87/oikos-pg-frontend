@@ -7,25 +7,26 @@ import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
 import LeaderAddAttendanceModal from "./components/LeaderAddAttendanceModal";
 import LeaderAttendanceListCards from "./components/LeaderAttendanceListCards";
-import ChangeAttendanceModal from "../../components/ChangeAttendanceModal";
 import Meeting from "../../types/Meeting";
 import formatDate from "../../utils/formatDate";
+import MeetingAttendance from "../../types/MeetingAttendance";
 
 const LeaderAttendanceList = () => {
   const location = useLocation();
-  const meeting: Meeting = location.state.meeting;
-
-  const [changeAttendanceId, setChangeAttendanceId] = useState<number | null>(
-    null
-  );
+  const [meeting, setMeeting] = useState<Meeting>(location.state.meeting);
   const [isAddAttendanceModalOpen, setIsAddAttendanceModalOpen] =
     useState(false);
+
+  const handleChangeAttendance = (attendance: MeetingAttendance) => {
+    const newAttendance = meeting.attendance!.map((a) =>
+      a.id === attendance.id ? attendance : a
+    );
+    setMeeting({ ...meeting, attendance: newAttendance });
+  };
 
   const handleAddNewVisitorButton = () => setIsAddAttendanceModalOpen(true);
   const handleCloseAddAttendanceModal = () =>
     setIsAddAttendanceModalOpen(false);
-
-  const closeChangeAttendanceModal = () => setChangeAttendanceId(null);
 
   return (
     <DefaultBackground gap={16}>
@@ -41,18 +42,14 @@ const LeaderAttendanceList = () => {
           Adicionar Visitante
         </Button>
         <LeaderAttendanceListCards
+          onSubmitChangeAttendance={handleChangeAttendance}
           attendance={meeting.attendance!}
-          onChangeAttendanceClick={setChangeAttendanceId}
         />
       </ScrollContainer>
       <LeaderNavigationButtons />
       <LeaderAddAttendanceModal
         isOpen={isAddAttendanceModalOpen}
         onClose={handleCloseAddAttendanceModal}
-      />
-      <ChangeAttendanceModal
-        isOpen={!!changeAttendanceId}
-        onClose={closeChangeAttendanceModal}
       />
     </DefaultBackground>
   );

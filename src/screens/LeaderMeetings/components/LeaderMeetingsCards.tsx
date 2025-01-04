@@ -19,6 +19,12 @@ interface LeaderMeetingsCardsProps {
   onFinishMeeting: () => void;
 }
 
+const countMissingAttendances = (attendanceList: MeetingAttendance[]) => {
+  return attendanceList.filter(
+    (attendance) => attendance.attendance_type === "Não Preenchido"
+  ).length;
+};
+
 const formatAttendanceString = (attendanceList: MeetingAttendance[]) => {
   const numberOfPresents = attendanceList.filter(
     (attendance) => attendance.attendance_type === "Presente"
@@ -26,14 +32,20 @@ const formatAttendanceString = (attendanceList: MeetingAttendance[]) => {
   const numberOfVisitants = attendanceList.filter(
     (attendance) => attendance.attendance_type === "Visitante"
   ).length;
-  const presentsString =
+  let string =
     numberOfPresents === 1 ? `1 Presente` : `${numberOfPresents} Presentes`;
   const visitantsString =
     numberOfVisitants === 1 ? `1 Visitante` : `${numberOfVisitants} Visitantes`;
+  const missingAttendancesString =
+    countMissingAttendances(attendanceList) === 1
+      ? `(1 Pendente)`
+      : `(${countMissingAttendances(attendanceList)} Pendentes)`;
 
-  if (numberOfVisitants) return `${presentsString} e ${visitantsString}`;
+  if (countMissingAttendances(attendanceList))
+    string += ` ${missingAttendancesString}`;
+  if (numberOfVisitants) string += ` e ${visitantsString}`;
 
-  return presentsString;
+  return string;
 };
 
 const LeaderMeetingsCards = ({
@@ -62,6 +74,14 @@ const LeaderMeetingsCards = ({
       state: { meeting },
     });
 
+  const handleFinishMeeting = (meeting: Meeting) => {
+    if (countMissingAttendances(meeting.attendance!))
+      return alert(
+        "Não é possível finalizar a reunião com presenças pendentes."
+      );
+    setFinishMeetingId(meeting.id);
+  };
+
   return (
     <>
       <LeaderMeetingsCardsContainer>
@@ -84,7 +104,7 @@ const LeaderMeetingsCards = ({
                     },
                     {
                       text: "Finalizar",
-                      onClick: () => setFinishMeetingId(meeting.id),
+                      onClick: () => handleFinishMeeting(meeting),
                       backgroundColor: theme.yellow.medium,
                     },
                     {
