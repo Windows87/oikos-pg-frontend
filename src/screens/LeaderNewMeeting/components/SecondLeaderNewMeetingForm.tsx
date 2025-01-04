@@ -2,17 +2,22 @@ import { useState } from "react";
 import Button from "../../../components/Button";
 import ContentsList from "../../../components/ContentsList";
 import MeetingContent from "../../../types/MeetingContent";
+import Meeting from "../../../types/Meeting";
 
 interface SecondLeaderNewMeetingFormProps {
+  meeting?: Meeting;
   isLoading: boolean;
   onSubmit: (contents: MeetingContent[]) => void;
 }
 
 const SecondLeaderNewMeetingForm = ({
+  meeting,
   isLoading,
   onSubmit,
 }: SecondLeaderNewMeetingFormProps) => {
-  const [contents, setContents] = useState<MeetingContent[]>([]);
+  const [contents, setContents] = useState<MeetingContent[]>(
+    meeting ? meeting.content : []
+  );
 
   const handleSubmit = () => {
     onSubmit(contents);

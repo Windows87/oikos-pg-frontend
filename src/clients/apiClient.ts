@@ -187,6 +187,40 @@ const apiClient = {
       }
     });
   },
+
+  editMeeting: (
+    meeting_id: number,
+    payload: {
+      name: string;
+      date: string;
+      theme: string;
+      contents: MeetingContent[];
+    }
+  ) => {
+    return new Promise<void>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings/${meeting_id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };
 
 export default apiClient;

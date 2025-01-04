@@ -47,8 +47,14 @@ const LeaderMeetingsCards = ({
 
   const handleCloseFinishMeetingModal = () => setFinishMeetingId(undefined);
   const goToAttendanceList = () => navigate("/leader/meeting/attendance");
+
   const goToMeetingInfo = (meeting: Meeting) =>
     navigate("/leader/meeting/", {
+      state: { meeting },
+    });
+
+  const goToEditMeeting = (meeting: Meeting) =>
+    navigate("/leader/meeting/new", {
       state: { meeting },
     });
 
@@ -69,7 +75,7 @@ const LeaderMeetingsCards = ({
                 ? [
                     {
                       text: "Editar",
-                      onClick: () => {},
+                      onClick: () => goToEditMeeting(meeting),
                       backgroundColor: theme.yellow.medium,
                     },
                     {

@@ -5,17 +5,29 @@ import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import meetingThemes from "../../../settings/meetingThemes";
+import Meeting from "../../../types/Meeting";
 
 interface FirstLeaderNewMeetingFormProps {
+  meeting?: Meeting;
   onSubmit: (name: string, date: string, theme: string) => void;
 }
 
+const formatDate = (date: string) => {
+  const dateObject = new Date(date);
+  const day = dateObject.getDate().toString().padStart(2, "0");
+  const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+  const year = dateObject.getFullYear();
+
+  return `${day}/${month}/${year}`;
+};
+
 const FirstLeaderNewMeetingForm = ({
+  meeting,
   onSubmit,
 }: FirstLeaderNewMeetingFormProps) => {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [theme, setTheme] = useState("");
+  const [name, setName] = useState(meeting ? meeting.name : "");
+  const [date, setDate] = useState(meeting ? formatDate(meeting.date) : "");
+  const [theme, setTheme] = useState(meeting ? meeting.theme : "");
 
   const handleSubmit = () => {
     const day = date.split("/")[0];
