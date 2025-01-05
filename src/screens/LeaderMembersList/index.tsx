@@ -8,10 +8,14 @@ import LeaderMembersCards from "./components/LeaderMembersCards";
 import User from "../../types/User";
 import apiClient from "../../clients/apiClient";
 import LeaderMembersListSkeleton from "./components/LeaderMembersListSkeleton";
+import LeaderAddMemberModal from "./components/LeaderAddMemberModal";
 
 const LeaderMembersList = () => {
   const [members, setMembers] = useState<User[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isNewMemberModalOpen, setIsNewMemberModalOpen] = useState(false);
+
+  const closeNewMemberModal = () => setIsNewMemberModalOpen(false);
 
   const fetchMembers = async () => {
     setIsLoading(true);
@@ -21,7 +25,7 @@ const LeaderMembersList = () => {
       setMembers(members);
       setIsLoading(false);
     } catch (error: any) {
-      alert("Erro ao carregar membros");
+      alert(error.message);
     }
   };
 
@@ -38,12 +42,23 @@ const LeaderMembersList = () => {
         subtitle={`${members.length} Membros Ativos do PG`}
       />
       <ScrollContainer gap={8}>
-        <Button width="100%" height={32} fontSize={14} lighter>
+        <Button
+          width="100%"
+          height={32}
+          fontSize={14}
+          lighter
+          onClick={() => setIsNewMemberModalOpen(true)}
+        >
           Adicionar Membro
         </Button>
         <LeaderMembersCards members={members} />
       </ScrollContainer>
       <LeaderNavigationButtons />
+      <LeaderAddMemberModal
+        isOpen={isNewMemberModalOpen}
+        onClose={closeNewMemberModal}
+        onNewMember={fetchMembers}
+      />
     </DefaultBackground>
   );
 };

@@ -23,7 +23,7 @@ const LeaderMemberInfo = () => {
       await apiClient.deleteMember(member.id);
       goToMembersList();
     } catch (error: any) {
-      alert("Erro ao remover membro");
+      alert(error.message);
       setIsDeleting(false);
     }
   };

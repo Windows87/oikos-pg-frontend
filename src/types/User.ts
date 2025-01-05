@@ -1,3 +1,4 @@
+import Group from "./Group";
 import MeetingAttendance from "./MeetingAttendance";
 
 export default interface User {
@@ -10,4 +11,5 @@ export default interface User {
   is_admin?: boolean;
   is_leader?: boolean;
   attendance?: MeetingAttendance[];
+  group?: Group;
 }

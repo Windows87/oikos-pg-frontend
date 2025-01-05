@@ -25,8 +25,12 @@ const FirstStep = ({ onChange }: FirstStepProps) => {
   return (
     <>
       <Paragraph centered>Qual o tipo de pessoa que quer adicionar?</Paragraph>
-      <Button onClick={() => onChange(2)}>Membro já Cadastrado</Button>
-      <Button onClick={() => onChange(1)}>Visitante</Button>
+      <Button onClick={() => onChange(2)} width="100%">
+        Membro já Cadastrado
+      </Button>
+      <Button onClick={() => onChange(1)} width="100%">
+        Visitante
+      </Button>
     </>
   );
 };
@@ -48,7 +52,7 @@ const VisitorStep = ({ meeting, onSubmit }: FormProps) => {
       );
       onSubmit(attendance);
     } catch (error: any) {
-      alert("Erro ao adicionar visitante");
+      alert(error.message);
       setIsLoading(false);
     }
   };
@@ -110,7 +114,7 @@ const MemberStep = ({ meeting, onSubmit }: FormProps) => {
       );
       onSubmit(meetingAttendance);
     } catch (error: any) {
-      alert("Erro ao adicionar membro");
+      alert(error.message);
     }
 
     setIsLoading(false);
