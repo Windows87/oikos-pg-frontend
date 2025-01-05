@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 
 const LeaderMemberAttendances = () => {
   const location = useLocation();
+
   const member: User = location.state.member;
 
   const numberOfSequentialAbsences = calculateNumberOfSequentialAbsences(
