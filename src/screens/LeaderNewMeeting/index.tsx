@@ -13,7 +13,7 @@ import Meeting from "../../types/Meeting";
 
 const LeaderNewMeeting = () => {
   const location = useLocation();
-  const meeting: Meeting = location.state.meeting;
+  const meeting: Meeting | undefined = location.state?.meeting;
 
   const navigate = useNavigate();
   const [formStep, setFormStep] = useState(0);

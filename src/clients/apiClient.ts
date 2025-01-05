@@ -1,5 +1,6 @@
 import api from "../settings/api";
 import Meeting from "../types/Meeting";
+import MeetingAttendance from "../types/MeetingAttendance";
 import MeetingContent from "../types/MeetingContent";
 import User from "../types/User";
 
@@ -270,6 +271,86 @@ const apiClient = {
         }
 
         resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
+  addVisitorAttendance: (
+    meeting_id: number,
+    visitor_name: string,
+    visitor_whatsapp: string
+  ) => {
+    return new Promise<MeetingAttendance>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings/${meeting_id}/visitors`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ visitor_name, visitor_whatsapp }),
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
+  addMemberAttendance: (meeting_id: number, user_id: number) => {
+    return new Promise<MeetingAttendance>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings/${meeting_id}/members`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ user_id }),
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
+  getMembers: () => {
+    return new Promise<User[]>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/members`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve(response);
       } catch (error) {
         reject(error);
       }

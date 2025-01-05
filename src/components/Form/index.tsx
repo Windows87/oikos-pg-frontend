@@ -16,7 +16,6 @@ interface FormProps {
 
 const Form = ({ children, onSubmit }: FormProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("alo");
     event.preventDefault();
     if (onSubmit) onSubmit();
   };

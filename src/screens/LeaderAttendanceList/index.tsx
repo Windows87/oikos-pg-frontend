@@ -31,6 +31,14 @@ const LeaderAttendanceList = () => {
     setMeeting({ ...meeting, attendance: newAttendance });
   };
 
+  const handleNewAttendance = (attendance: MeetingAttendance) => {
+    console.log(attendance);
+    setMeeting({
+      ...meeting,
+      attendance: [...meeting.attendance!, attendance],
+    });
+  };
+
   const handleAddNewVisitorButton = () => setIsAddAttendanceModalOpen(true);
   const handleCloseAddAttendanceModal = () =>
     setIsAddAttendanceModalOpen(false);
@@ -56,8 +64,10 @@ const LeaderAttendanceList = () => {
       </ScrollContainer>
       <LeaderNavigationButtons />
       <LeaderAddAttendanceModal
+        meeting={meeting}
         isOpen={isAddAttendanceModalOpen}
         onClose={handleCloseAddAttendanceModal}
+        onNewAttendance={handleNewAttendance}
       />
     </DefaultBackground>
   );
