@@ -25,7 +25,8 @@ const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
 
   const handleCloseChangeAttendanceModal = () =>
     setMeetingSetAttendanceId(null);
-  const goToMeetinginfo = () => navigate("/member/meeting");
+  const goToMeetingInfo = (meeting: Meeting) =>
+    navigate("/member/meeting", { state: { meeting } });
 
   return (
     <>
@@ -44,7 +45,7 @@ const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
                 ? [
                     {
                       text: "Visualizar",
-                      onClick: goToMeetinginfo,
+                      onClick: () => goToMeetingInfo(meeting),
                       backgroundColor: theme.yellow.medium,
                     },
                     {
@@ -56,7 +57,7 @@ const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
                 : [
                     {
                       text: "Visualizar",
-                      onClick: goToMeetinginfo,
+                      onClick: () => goToMeetingInfo(meeting),
                     },
                   ]
             }
