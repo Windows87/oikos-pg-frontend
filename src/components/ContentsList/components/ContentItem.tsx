@@ -44,7 +44,7 @@ const ContentItem = ({
   const ContentItemIcon = contentTypeToIconMap[content.type];
 
   const handleClick = () => {
-    window.open(content.link, "_newtab");
+    if (!enableDeletion) window.open(content.link, "_newtab");
   };
 
   return (

@@ -75,9 +75,11 @@ const LeaderNewMeeting = () => {
       <LeaderNewMeetingFormContainer>
         <Logo width={30} />
         {forms[formStep]}
-        <LeaderNewMeetingCancelText onClick={handleCancelMeetingClick}>
-          Cancelar Encontro
-        </LeaderNewMeetingCancelText>
+        {meeting ? (
+          <LeaderNewMeetingCancelText onClick={handleCancelMeetingClick}>
+            Cancelar Encontro
+          </LeaderNewMeetingCancelText>
+        ) : null}
       </LeaderNewMeetingFormContainer>
       <LeaderNavigationButtons />
       <CancelMeetingModal

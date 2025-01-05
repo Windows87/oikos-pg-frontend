@@ -41,17 +41,20 @@ const ContentAdditionModal = ({
           placeholder="Nome"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <Select
           placeholder="Tipo"
           options={contentTypes}
           value={type}
           onChange={(e) => setType(e.target.value)}
+          required
         />
         <Input
           placeholder="Link"
           value={link}
           onChange={(e) => setLink(e.target.value)}
+          required
         />
         <Button type="submit">Adicionar</Button>
       </Form>
