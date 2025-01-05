@@ -39,13 +39,15 @@ const LeaderMeetings = () => {
 
   if (isLoading) return <LeaderMeetingsSkeleton />;
 
+  const numberOfMeetingsOfYear = getNumberOfMeetingsOfYear(meetings);
+
   return (
     <DefaultBackground gap={16}>
       <PageTitle
         title="Encontros"
-        subtitle={`${getNumberOfMeetingsOfYear(
-          meetings
-        )} Encontros em ${new Date().getFullYear()}!`}
+        subtitle={`${numberOfMeetingsOfYear} Encontro${
+          numberOfMeetingsOfYear === 1 ? "" : "s"
+        } em em ${new Date().getFullYear()}!`}
       />
       <ScrollContainer gap={8}>
         <LeaderNewMeetingButton />
