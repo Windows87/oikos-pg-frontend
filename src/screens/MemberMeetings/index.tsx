@@ -49,7 +49,10 @@ const MemberMeetings = () => {
         } em em ${new Date().getFullYear()}!`}
       />
       <ScrollContainer gap={8}>
-        <MemberMeetingsCards meetings={meetings} />
+        <MemberMeetingsCards
+          meetings={meetings}
+          onUpdateAttendance={fetchMeetings}
+        />
       </ScrollContainer>
       <MemberNavigationButtons />
     </DefaultBackground>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Meeting from "../../../types/Meeting";
 import formatDate from "../../../utils/formatDate";
+import MeetingAttendance from "../../../types/MeetingAttendance";
 
 const MemberMeetingsCardsContainer = styled.div`
   display: flex;
@@ -15,16 +16,18 @@ const MemberMeetingsCardsContainer = styled.div`
 
 interface MemberMeetingsCardsProps {
   meetings: Meeting[];
+  onUpdateAttendance: () => void;
 }
 
-const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
+const MemberMeetingsCards = ({
+  meetings,
+  onUpdateAttendance,
+}: MemberMeetingsCardsProps) => {
   const navigate = useNavigate();
-  const [meetingSetAttendanceId, setMeetingSetAttendanceId] = useState<
-    number | null
-  >(null);
+  const [meetingSetAttendance, setMeetingSetAttendance] =
+    useState<MeetingAttendance | null>(null);
 
-  const handleCloseChangeAttendanceModal = () =>
-    setMeetingSetAttendanceId(null);
+  const handleCloseChangeAttendanceModal = () => setMeetingSetAttendance(null);
   const goToMeetingInfo = (meeting: Meeting) =>
     navigate("/member/meeting", { state: { meeting } });
 
@@ -50,7 +53,8 @@ const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
                     },
                     {
                       text: "Marcar Presença",
-                      onClick: () => setMeetingSetAttendanceId(1),
+                      onClick: () =>
+                        setMeetingSetAttendance(meeting.attendance![0]),
                       backgroundColor: theme.yellow.medium,
                     },
                   ]
@@ -64,6 +68,12 @@ const MemberMeetingsCards = ({ meetings }: MemberMeetingsCardsProps) => {
           />
         ))}
       </MemberMeetingsCardsContainer>
+      <ChangeAttendanceModal
+        isOpen={!!meetingSetAttendance}
+        onClose={handleCloseChangeAttendanceModal}
+        attendance={meetingSetAttendance!}
+        onSubmit={onUpdateAttendance}
+      />
     </>
   );
 };
