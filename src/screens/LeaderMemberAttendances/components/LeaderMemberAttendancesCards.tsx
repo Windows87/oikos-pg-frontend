@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Card from "../../../components/Card";
-import theme from "../../../settings/theme";
 import MeetingAttendance from "../../../types/MeetingAttendance";
 import formatDate from "../../../utils/formatDate";
 import attendanceTypeToTheme from "../../../settings/attendanceTypeToTheme";

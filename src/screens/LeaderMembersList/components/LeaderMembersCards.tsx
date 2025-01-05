@@ -32,7 +32,8 @@ const LeaderMembersCards = ({ members }: LeaderMembersCards) => {
 
   const goToMemberAttendance = (member: User) =>
     navigate("/leader/member/attendance", { state: { member } });
-  const goToMemberInfo = () => navigate("/leader/member/info");
+  const goToMemberInfo = (member: User) =>
+    navigate("/leader/member/info", { state: { member } });
 
   return (
     <LeaderMembersCardsContainer>
@@ -48,7 +49,7 @@ const LeaderMembersCards = ({ members }: LeaderMembersCards) => {
             },
             {
               text: "Perfil",
-              onClick: goToMemberInfo,
+              onClick: () => goToMemberInfo(member),
             },
           ]}
         />
