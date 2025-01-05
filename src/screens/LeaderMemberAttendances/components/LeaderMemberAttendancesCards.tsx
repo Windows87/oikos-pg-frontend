@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Card from "../../../components/Card";
 import theme from "../../../settings/theme";
+import MeetingAttendance from "../../../types/MeetingAttendance";
+import formatDate from "../../../utils/formatDate";
+import attendanceTypeToTheme from "../../../settings/attendanceTypeToTheme";
 
 const LeaderMemberAttendancesCardsContainer = styled.div`
   display: flex;
@@ -8,19 +11,28 @@ const LeaderMemberAttendancesCardsContainer = styled.div`
   gap: 8px;
 `;
 
-const LeaderMemberAttendancesCards = () => {
+interface LeaderMemberAttendancesCardsProps {
+  attendances: MeetingAttendance[];
+}
+
+const LeaderMemberAttendancesCards = ({
+  attendances,
+}: LeaderMemberAttendancesCardsProps) => {
   return (
     <LeaderMemberAttendancesCardsContainer>
-      <Card
-        title="Casamento"
-        backgroundColor={theme.green.dark}
-        texts={["12 de Janeiro", "Presente"]}
-      />
-      <Card
-        title="Família"
-        backgroundColor={theme.green.dark}
-        texts={["5 de Janeiro", "Presente"]}
-      />
+      {attendances.map((attendance) => (
+        <Card
+          title={attendance.meeting!.name}
+          texts={[
+            formatDate(attendance.meeting!.date),
+            attendance.attendance_type,
+          ]}
+          backgroundColor={
+            // @ts-ignore
+            attendanceTypeToTheme[attendance.attendance_type].dark
+          }
+        />
+      ))}
     </LeaderMemberAttendancesCardsContainer>
   );
 };

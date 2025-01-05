@@ -1,3 +1,4 @@
+import Meeting from "./Meeting";
 import User from "./User";
 
 export default interface MeetingAttendance {
@@ -7,4 +8,5 @@ export default interface MeetingAttendance {
   absence_reason?: string;
   visitor_name?: string;
   visitor_whatsapp?: string;
+  meeting?: Meeting;
 }

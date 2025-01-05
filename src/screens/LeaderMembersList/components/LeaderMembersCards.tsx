@@ -30,7 +30,8 @@ const generateMemberText = (member: User) => {
 const LeaderMembersCards = ({ members }: LeaderMembersCards) => {
   const navigate = useNavigate();
 
-  const goToMemberAttendance = () => navigate("/leader/member/attendance");
+  const goToMemberAttendance = (member: User) =>
+    navigate("/leader/member/attendance", { state: { member } });
   const goToMemberInfo = () => navigate("/leader/member/info");
 
   return (
@@ -43,7 +44,7 @@ const LeaderMembersCards = ({ members }: LeaderMembersCards) => {
           buttons={[
             {
               text: "Presenças",
-              onClick: goToMemberAttendance,
+              onClick: () => goToMemberAttendance(member),
             },
             {
               text: "Perfil",
