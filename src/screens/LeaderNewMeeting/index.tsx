@@ -10,6 +10,8 @@ import SecondLeaderNewMeetingForm from "./components/SecondLeaderNewMeetingForm"
 import MeetingContent from "../../types/MeetingContent";
 import apiClient from "../../clients/apiClient";
 import Meeting from "../../types/Meeting";
+import LeaderNewMeetingCancelText from "./components/LeaderNewMeetingCancelText";
+import CancelMeetingModal from "./components/CancelMeetingModal";
 
 const LeaderNewMeeting = () => {
   const location = useLocation();
@@ -18,6 +20,8 @@ const LeaderNewMeeting = () => {
   const navigate = useNavigate();
   const [formStep, setFormStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCancelMeetingModalOpen, setIsCancelMeetingModalOpen] =
+    useState(false);
   const [meetingData, setMeetingData] = useState({
     name: "",
     date: "",
@@ -46,6 +50,8 @@ const LeaderNewMeeting = () => {
     }
   };
 
+  const handleCancelMeetingClick = () => setIsCancelMeetingModalOpen(true);
+  const handleCloseCancelModal = () => setIsCancelMeetingModalOpen(false);
   const sendToLeaderMeetings = () => navigate("/leader/meetings");
 
   const forms = [
@@ -69,8 +75,17 @@ const LeaderNewMeeting = () => {
       <LeaderNewMeetingFormContainer>
         <Logo width={30} />
         {forms[formStep]}
+        <LeaderNewMeetingCancelText onClick={handleCancelMeetingClick}>
+          Cancelar Encontro
+        </LeaderNewMeetingCancelText>
       </LeaderNewMeetingFormContainer>
       <LeaderNavigationButtons />
+      <CancelMeetingModal
+        isOpen={isCancelMeetingModalOpen}
+        meetingId={meeting?.id}
+        onSubmit={sendToLeaderMeetings}
+        onClose={handleCloseCancelModal}
+      />
     </DefaultBackground>
   );
 };

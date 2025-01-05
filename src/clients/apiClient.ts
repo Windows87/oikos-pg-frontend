@@ -406,6 +406,30 @@ const apiClient = {
       }
     });
   },
+
+  cancelMeeting: (meeting_id: number) => {
+    return new Promise<void>(async (resolve, reject) => {
+      const token = localStorage.getItem("token");
+      try {
+        const call = await fetch(`${api.url}/meetings/${meeting_id}/cancel`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const response = await call.json();
+
+        if (!call.ok) {
+          reject(response);
+        }
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };
 
 export default apiClient;
