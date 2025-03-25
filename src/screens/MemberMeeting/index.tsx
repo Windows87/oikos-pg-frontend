@@ -5,7 +5,6 @@ import DefaultBackground from "../../components/DefaultBackground";
 import MemberNavigationButtons from "../../components/MemberNavigationButtons";
 import PageTitle from "../../components/PageTitle";
 import ScrollContainer from "../../components/ScrollContainer";
-import MeetingContent from "../../types/MeetingContent";
 import Meeting from "../../types/Meeting";
 import formatDate from "../../utils/formatDate";
 
