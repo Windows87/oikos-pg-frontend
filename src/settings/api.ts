@@ -1,5 +1,5 @@
 const api = {
-  url: "http://192.168.15.3:3000/api",
+  url: "https://oikos-pg-edd6ab2a4092.herokuapp.com/api",
 };
 
 export default api;
