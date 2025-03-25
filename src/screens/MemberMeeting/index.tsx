@@ -9,15 +9,6 @@ import MeetingContent from "../../types/MeetingContent";
 import Meeting from "../../types/Meeting";
 import formatDate from "../../utils/formatDate";
 
-const contents: MeetingContent[] = [
-  {
-    id: 1,
-    name: "Perguntas do PG",
-    type: "PDF",
-    link: "/meeting/1",
-  },
-];
-
 const MemberMeeting = () => {
   const location = useLocation();
   const meeting: Meeting = location.state.meeting;
